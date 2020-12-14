@@ -1,0 +1,11 @@
+python-gitlab
+python-dotenv
+pandas
+pytest
+PyGithub
+PyYAML
+google-api-python-client
+google-auth
+numpy
+oauth2client
+jinja2

@@ -1,0 +1,11 @@
+teams:
+  - name:                                        # Name of the team that will get the report
+    recipients: []                               # List of email addresses
+    servers:
+        - vendor:                                # e.g GitHub, GitLab, Gerrit...
+          host:                                  # e.g github.com
+          namespaces: []                         # List of orgs/groups to take the repositories from; GitLab's groups are
+                                                 # determined by an ID number, while GitHub and Gerrit by their names
+          users: []                              # List of users to take the repositories from (Only available on GitLab)
+          repositories: []                       # List of repositories to report on, or "*" to get all the repositories
+          bot_users: []                          # List of bot users to blacklist code changes from (only available on Gerrit)

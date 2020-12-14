@@ -1,0 +1,89 @@
+[
+    {
+        "model":"database.contributor",
+        "pk":1,
+        "fields":{
+            "name": "Shlomi",
+            "github_id": "8031274921"
+        }
+    },
+    {
+        "model":"database.contributor",
+        "pk":2,
+        "fields":{
+            "name": "Moshe",
+            "gitlab_id": "32132131"
+        }
+    },
+    {
+        "model":"database.contributor",
+        "pk":3,
+        "fields":{
+            "name": "David",
+            "gerrit_id": "54325733"
+        }
+    },
+    {
+        "model":"database.project",
+        "pk":1,
+        "fields":{
+            "name": "batyam"
+        }
+    },
+    {
+        "model":"database.project",
+        "pk":2,
+        "fields":{
+            "name": "ashdod"
+        }
+    },
+    {
+        "model":"database.project",
+        "pk":3,
+        "fields":{
+            "name": "evenyehuda"
+        }
+    },
+    {
+        "model":"database.codecontribution",
+        "pk":1,
+        "fields":{
+        "project": "1",
+        "contributor":"1",
+        "last_updated":"one day ago",
+        "url":"https://blabla.com/some_commit",
+        "title":"Add Django app to batyam",
+        "state":"Open",
+        "vendor":"Gerrit",
+        "team":"rhv"
+        }
+    },
+    {
+        "model":"database.codecontribution",
+        "pk":2,
+        "fields":{
+            "project": "2",
+            "contributor":"2",
+            "last_updated":"30 minutes ago",
+            "url":"https://blabla.com/some_other_commit",
+            "title":"Fixed some typos",
+            "state":"Open",
+            "vendor":"Gerrit",
+            "team":"cnv"
+        }
+    },
+    {
+        "model":"database.codecontribution",
+        "pk":3,
+        "fields":{
+            "project": "3",
+            "contributor":"3",
+            "last_updated":"one hour ago",
+            "url":"https://blabla.com/last_commit",
+            "title":"Added CI for oscp",
+            "state":"Closed",
+            "vendor":"Gitlab",
+            "team":"oscp"
+        }
+    }
+]
