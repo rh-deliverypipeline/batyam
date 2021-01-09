@@ -1,4 +1,5 @@
 *
 !*.py
+!requirements.txt
 !requirements.lock
 !templates
