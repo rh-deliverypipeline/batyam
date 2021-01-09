@@ -202,9 +202,15 @@ class Gerrit(Server):
         for project in self.namespaces:
             skip = 0
             results_cnt = self.query_limit
+            gerrit_identity_file = os.getenv("GERRIT_IDENTITY_FILE")
+            if not gerrit_identity_file:
+                logging.warning(
+                    'No identity file found for Gerrit. Please set "GERRIT_IDENTITY_FILE to be the path to the identity file')
+                continue
+
             while results_cnt >= self.query_limit:
                 cc_content = check_output([
-                    'ssh', self.host, '-p', '29418', 'gerrit', 'query',
+                    'ssh', self.host, '-p', '29418', '-i', gerrit_identity_file, 'gerrit', 'query',
                     '--comments', '--all-approvals', '--format=JSON',
                     '--start', str(skip), 'limit:' + str(self.query_limit),
                                           'project:' + project, 'status:' + status,
