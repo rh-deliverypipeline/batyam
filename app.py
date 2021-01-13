@@ -23,7 +23,7 @@ logging.basicConfig(filename='report.log',
 def send_email(subject, body, recipients=None):
     """send an email to the selected recipients with a given body context."""
 
-    # hack for now, validation should happen when program starts
+    # TODO: hack for now, validation should happen when program starts
     email_from = os.getenv("EMAIL_FROM")
     if not email_from:
         logging.info("no EMAIL_FROM env var set, exiting")
@@ -36,7 +36,7 @@ def send_email(subject, body, recipients=None):
         msg['To'] = ", ".join(recipients)
         msg.set_content(body, subtype='html')
         # the localhost assumes you have an smtp server running on you machine
-        with smtplib.SMTP(os.getenv("EMAIL_PROXY_SERVER","localhost")) as server:
+        with smtplib.SMTP(os.getenv("EMAIL_PROXY_SERVER", "localhost")) as server:
             server.send_message(msg)
             logging.info("mail sent successfully.")
     else:
