@@ -25,10 +25,11 @@ def send_email(subject, body, recipients=None):
     if recipients:
         msg = EmailMessage()
         msg['Subject'] = f'{subject} - {datetime.now().date().strftime("%d/%m/%y")}'
-        msg['From'] = 'oamsalem@redhat.com'
+        msg['From'] = os.getenv("EMAIL_FROM")
         msg['To'] = ", ".join(recipients)
         msg.set_content(body, subtype='html')
-        with smtplib.SMTP('localhost') as server:
+        # the localhost assumes you have an smtp server running on you machine
+        with smtplib.SMTP(os.getenv("EMAIL_PROXY_SERVER","localhost")) as server:
             server.send_message(msg)
             logging.info("mail sent successfully.")
     else:
