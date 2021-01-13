@@ -22,10 +22,17 @@ logging.basicConfig(filename='report.log',
 
 def send_email(subject, body, recipients=None):
     """send an email to the selected recipients with a given body context."""
+
+    # hack for now, validation should happen when program starts
+    email_from = os.getenv("EMAIL_FROM")
+    if not email_from:
+        logging.info("no EMAIL_FROM env var set, exiting")
+        raise Exception()
+
     if recipients:
         msg = EmailMessage()
         msg['Subject'] = f'{subject} - {datetime.now().date().strftime("%d/%m/%y")}'
-        msg['From'] = os.getenv("EMAIL_FROM")
+        msg['From'] = email_from
         msg['To'] = ", ".join(recipients)
         msg.set_content(body, subtype='html')
         # the localhost assumes you have an smtp server running on you machine
