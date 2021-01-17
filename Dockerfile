@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/python-36
+FROM registry.access.redhat.com/ubi8/python-38
 LABEL "io.openshift.s2i.build.image"="registry.access.redhat.com/ubi8/python-36" \
       "io.openshift.s2i.build.commit.author"="Omer Amsalem <oamsalem@redhat.com>" \
       "io.openshift.s2i.build.commit.date"="Tue Nov 17 10:14:04 2020 +0200" \
