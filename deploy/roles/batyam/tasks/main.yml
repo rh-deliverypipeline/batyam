@@ -1,2 +1,33 @@
 ---
 # tasks file for batyam
+
+- name: install openshift package for the 'k8s' module
+  pip:
+    name: openshift
+
+- name: Create configmap
+  k8s:
+    api_key: "{{ batyam_ocp_token }}"
+    host: "{{ batyam_ocp_host }}"
+    state: "{{ batyam_deploy_state }}"
+    #this is currently commented out as I didn't test with a CACERT in place
+    #ca_cert: "{{ batyam_ca_cert }}"
+    name: batyam-gerrit-identity-path-envvar
+    namespace: "{{ batyam_ocp_resources_namespace }}"
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        # maybe add prefix of 'batyam-' to make resources use better
+        #
+        # a good convention would be adding envvar to anything we import
+        # as an envvar to have the '-envvar' suffix
+        name: batyam-gerrit-identity-path-envvar
+        namespace: "{{ batyam_ocp_resources_namespace }}"
+      data:
+        # this can also split up into multiple defaults
+        #
+        # # default_path
+        # folder name we decided on that can be hardcoded
+        # # gerrit_token_key_name
+        GERRIT_IDENTITY_FILE: /tmp/gerrit-key
