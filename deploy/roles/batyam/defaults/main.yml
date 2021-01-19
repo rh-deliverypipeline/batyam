@@ -1,2 +1,4 @@
 ---
 # defaults file for batyam
+
+batyam_deploy_state: present

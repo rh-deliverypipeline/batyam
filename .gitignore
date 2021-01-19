@@ -1,2 +1,3 @@
 # specific log collection in the deploy folder
 deploy/logs
+deploy/vaults
