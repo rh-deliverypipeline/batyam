@@ -5,7 +5,7 @@
   pip:
     name: openshift
 
-- name: Create configmap
+- name: Create configmap batyam-gerrit-identity-path-envvar
   k8s:
     api_key: "{{ batyam_ocp_token }}"
     host: "{{ batyam_ocp_host }}"
@@ -31,3 +31,28 @@
         # folder name we decided on that can be hardcoded
         # # gerrit_token_key_name
         GERRIT_IDENTITY_FILE: /tmp/gerrit-key
+
+- name: clone a private repository
+  git:
+    repo: "{{ batyam_configs_repo }}"
+    key_file: "{{ batyam_configs_repo_key }}"
+    dest: "{{ batyam_configs_repo_dir }}"
+    version: "{{ batyam_configs_repo_version }}"
+
+- name: create batyam-repos-volume configmap
+  k8s:
+    api_key: "{{ batyam_ocp_token }}"
+    host: "{{ batyam_ocp_host }}"
+    state: "{{ batyam_deploy_state }}"
+    # a good convention would be adding volume to anything we import
+    # as an volume to have the '-volume' suffix
+    name: batyam-repos-volume
+    namespace: "{{ batyam_ocp_resources_namespace }}"
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: batyam-repos-volume
+        namespace: "{{ batyam_ocp_resources_namespace }}"
+      data:
+        config.yaml: "{{ lookup('file', batyam_configs_repo_dir + '/config.yaml') }}"
