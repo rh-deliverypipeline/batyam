@@ -14,6 +14,7 @@ ansible-vault create ./deploy/vaults/dev/secret-vars.yml
 the path needs to be under the `./deploy/vaults/` in order to not commit accidently your secret
 
 a sample inventory file is shown in `./deploy/vaults/secret-vars-sample.yml`
+
 and is exposed and has sample values for demonstration purposes.
 
 ## Testing
@@ -38,8 +39,8 @@ That we can distinguish between then and other static resources that were previo
 #### End with '-volume'/ '-envvar'  for ConfigMaps and Secrets
 To dintinguish between resources we mount and environment variables, and some we mount as files, we denoted this suffix
 
--volume: for volumeMounts
--envvar: for environment variables
+- -volume: for volumeMounts
+- -envvar: for environment variables
 
 ## Format of `batyam_configs_repo`
 As of now, the way this repo should look like is:
@@ -50,4 +51,4 @@ $ cd $batyam_configs_repo && find . -maxdepth 1
 ./.git
 ```
 
-where config.yaml should be in the general format of the file [](./config.yaml)
+where config.yaml should be in the general format of the [config.yaml file](./config.yaml)
