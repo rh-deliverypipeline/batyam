@@ -49,3 +49,6 @@ Improved visibility of current CC’s.
 # Requirements
 
 - Copy the .env_template file content to a .env file and insert the required keys.
+
+# Contributing
+See [](./CONTRIBUTING.md)

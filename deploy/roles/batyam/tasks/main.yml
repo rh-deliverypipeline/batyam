@@ -10,7 +10,7 @@
     api_key: "{{ batyam_ocp_token }}"
     host: "{{ batyam_ocp_host }}"
     state: "{{ batyam_deploy_state }}"
-    #this is currently commented out as I didn't test with a CACERT in place
+    # TODO: make batyam ocp connection use CACERT file
     #ca_cert: "{{ batyam_ca_cert }}"
     name: batyam-gerrit-identity-path-envvar
     namespace: "{{ batyam_ocp_resources_namespace }}"
@@ -18,18 +18,10 @@
       apiVersion: v1
       kind: ConfigMap
       metadata:
-        # maybe add prefix of 'batyam-' to make resources use better
-        #
-        # a good convention would be adding envvar to anything we import
-        # as an envvar to have the '-envvar' suffix
         name: batyam-gerrit-identity-path-envvar
         namespace: "{{ batyam_ocp_resources_namespace }}"
       data:
-        # this can also split up into multiple defaults
-        #
-        # # default_path
-        # folder name we decided on that can be hardcoded
-        # # gerrit_token_key_name
+        # TODO: set data to actual data when secret is also created
         GERRIT_IDENTITY_FILE: /tmp/gerrit-key
 
 - name: clone a private repository
@@ -44,8 +36,6 @@
     api_key: "{{ batyam_ocp_token }}"
     host: "{{ batyam_ocp_host }}"
     state: "{{ batyam_deploy_state }}"
-    # a good convention would be adding volume to anything we import
-    # as an volume to have the '-volume' suffix
     name: batyam-repos-volume
     namespace: "{{ batyam_ocp_resources_namespace }}"
     definition:
