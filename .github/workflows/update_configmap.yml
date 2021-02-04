@@ -1,0 +1,12 @@
+name: update_config_map
+on: [push]
+jobs:
+  update_config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: git@github.com:rh-deliverypipeline/batyam.git
+          path: upstream
+      - uses: actions/checkout@v2
+      - run: upstream/deploy/deploy.sh
