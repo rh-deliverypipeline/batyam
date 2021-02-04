@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: git@github.com:rh-deliverypipeline/batyam.git
+          repository: rh-deliverypipeline/batyam
           path: upstream
       - uses: actions/checkout@v2
       - run: upstream/deploy/deploy.sh
