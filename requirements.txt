@@ -9,3 +9,4 @@ google-auth
 numpy
 oauth2client
 jinja2
+requests

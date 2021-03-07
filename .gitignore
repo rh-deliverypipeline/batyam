@@ -1,3 +1,22 @@
-# specific log collection in the deploy folder
+# Editors
+.vscode/
+.idea/
+
+# Environments
+.env
+.venv
+venv-37/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Etc
+report.log
+gitlab
+**/__pycache__/*
+
+## specific log collection in the deploy folder
 deploy/logs
 deploy/vaults

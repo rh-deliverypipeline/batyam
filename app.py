@@ -9,6 +9,8 @@ import pandas as pd
 import base
 import yaml
 import logging
+import requests
+import json
 import google_spreadsheets
 import os
 from datetime import datetime
@@ -102,9 +104,21 @@ def create_servers_from_dictionary(team):
     return servers
 
 
+def post_to_http(df):
+    result = df.to_json(orient="records")
+    parsed = json.loads(result)
+    formatted = json.dumps(parsed, indent=4)
+    displayer_host = os.getenv('DISPLAYER_HOST', '127.0.0.1:8000')
+    try:
+        request = requests.post(f'http://{displayer_host}/database/update', data = formatted)
+    except requests.exceptions.ConnectionError:
+        print("Server is unreachable and probably down.")
+
+
 def main():
     pd.set_option('display.max_colwidth', -1)
     pd.set_option('display.max_columns', 10)
+    frames = []
     for team in get_configuration().get('teams'):
         # produce a separate report for each team (recipient)
 
@@ -116,6 +130,9 @@ def main():
         df_cc = process(df_cc, server_list)
         df_cc.index += 1
         publish(df_cc, team.get('recipients'), team.get("name"))
+        frames.append(df_cc)
+
+    post_to_http(pd.concat(frames))
 
 
 if __name__ == '__main__':
